@@ -1,4 +1,10 @@
 
+from sklearn.ensemble import RandomForestClassifier
+
+from sklearn.naive_bayes import GaussianNB
+from skmultilearn.problem_transform import BinaryRelevance
+from sklearn.neural_network import MLPClassifier
+
 
 
 import json
@@ -70,7 +76,6 @@ def load_hyperparameters(dataset):
 @task
 def tune_hyperparameters(c, X_train, y_train):
     """Tune hyperparameters for classifiers and return the best classifier and its parameters."""
-    #best_classifiers = load_hyperparameters()
     tuned_classifiers = {}
 
     # Convert y_train to a dense format if it is sparse
@@ -79,37 +84,31 @@ def tune_hyperparameters(c, X_train, y_train):
     else:
         y_train_dense = y_train
 
-    #'classifier': best_classifiers[classifier_name]['classifier'],
-    #            'params': best_classifiers[classifier_name]['params']
     for classifier_name, param_grid in param_grids.items():
-        #if classifier_name in best_classifiers:
-        #    print(f"Loading best hyperparameters for {classifier_name}: {best_classifiers[classifier_name]}")
-        #    tuned_classifiers[classifier_name] = {
-        #        'classifier_type': classifier_name,
-        #        'params': best_classifiers[classifier_name]['params']
-        #    }
-        #else:
-            if classifier_name == 'SVC':
-                # Create a pipeline for SVC
-                classifier = MultiOutputClassifier(make_pipeline(StandardScaler(with_mean=False), SVC(probability=True)))
-            elif classifier_name == 'DecisionTreeClassifier':
-                # Create a pipeline for DecisionTreeClassifier
-                classifier = MultiOutputClassifier(DecisionTreeClassifier())
+            #if classifier_name == 'SVC':
+            #    classifier = MultiOutputClassifier(make_pipeline(StandardScaler(with_mean=False), SVC(probability=True)))
+            if classifier_name == 'DecisionTreeClassifier':
+                classifier = BinaryRelevance( DecisionTreeClassifier() )
+            elif classifier_name == 'RandomForestClassifier':
+                classifier = BinaryRelevance( RandomForestClassifier() )
+            elif classifier_name == 'GaussianNB':
+                classifier = BinaryRelevance( GaussianNB() )
+            elif classifier_name == 'MLPClassifier':
+                classifier = BinaryRelevance(MLPClassifier())
             else:
                 continue  # Skip if classifier is not recognized
 
             # Perform hyperparameter tuning
             grid_search = GridSearchCV(classifier, param_grid, cv=5, scoring='f1_micro')
             grid_search.fit(X_train, y_train_dense)  # Use the dense y_train
-
             # Store the best classifier and its parameters
+            best_params = {k.replace("classifier__", ""):v for k, v in grid_search.best_params_.items()}
             tuned_classifiers[classifier_name] = {
                 'classifier': grid_search.best_estimator_,
-                'params': grid_search.best_params_
+                'params': best_params
             }
-            print(f"Best hyperparameters for {classifier_name}: {grid_search.best_params_}")
+            print(f"Best hyperparameters for {classifier_name}: {best_params}")
 
-    #save_hyperparameters(tuned_classifiers)
     return tuned_classifiers
 
 

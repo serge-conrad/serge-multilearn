@@ -1,0 +1,26 @@
+{
+    "emotions": {
+        "DecisionTreeClassifier": {
+            "params": {
+                "max_depth": 1
+            }
+        },
+        "RandomForestClassifier": {
+            "params": {
+                "max_depth": 3
+            }
+        }
+    },
+    "yeast": {
+        "DecisionTreeClassifier": {
+            "params": {
+                "max_depth": 3
+            }
+        },
+        "RandomForestClassifier": {
+            "params": {
+                "max_depth": 3
+            }
+        }
+    }
+}

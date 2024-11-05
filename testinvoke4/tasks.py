@@ -1,7 +1,19 @@
 # main.py
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.multiclass import OneVsRestClassifier
 
 
 
+
+
+
+from tests import test0
+from tests import test1
+from tests import teststratkfold
+from tests import testrepeatstratkfold
+from tests import testshuffle
+#from tests import test2
 
 import json
 import os
@@ -16,6 +28,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV
 from sklearn.multioutput import MultiOutputClassifier
 from config import PARAMS_FILE,datasets  # Import the global variable
+from sklearn.neural_network import MLPClassifier
 
 
 
@@ -27,14 +40,35 @@ def create_classifier(classifier_name, params):
     """Reconstruct the classifier based on its type and parameters."""
     if classifier_name == 'SVC':
         classifier = make_pipeline(StandardScaler(with_mean=False), SVC(probability=True, **params))
-    elif classifier_name == 'DecisionTreeClassifier':
-        classifier = DecisionTreeClassifier(**params)
+    elif classifier_name == 'DecisionTreeClassifier_BinaryRelevance':
+        classifier = BinaryRelevance( DecisionTreeClassifier(**params) )
+    elif classifier_name == 'DecisionTreeClassifier_OneVsRest':
+        classifier = OneVsRestClassifier(DecisionTreeClassifier(**params))
+        #classifier = DecisionTreeClassifier(**params)
+    elif classifier_name == 'RandomForestClassifier_BinaryRelevance':
+        classifier = BinaryRelevance( RandomForestClassifier(**params) )
+    elif classifier_name == 'RandomForestClassifier_OneVsRest':
+        classifier = OneVsRestClassifier(RandomForestClassifier(**params))
+
+
+
+        #classifier = RandomForestClassifier(**params)
+
+    elif classifier_name == 'GaussianNB':
+       classifier = BinaryRelevance( GaussianNB(**params) )
+    elif classifier_name == 'MLPClassifier':
+        classifier = BinaryRelevance(MLPClassifier(**params))
+
+
+
     else:
         raise ValueError(f"Unknown classifier: {classifier_name}")
 
     return classifier
 
 
+
+from skmultilearn.problem_transform import BinaryRelevance
 @task
 def run_all(c):
     """Run all evaluations for all classifiers and datasets."""
@@ -43,25 +77,24 @@ def run_all(c):
         X_train, y_train, X_test, y_test = prepare_data(c, var)
 
 
-        # Check if the hyperparameters file exists
-        if not os.path.exists(PARAMS_FILE):
-            # Tune hyperparameters if the file does not exist
+
+        # SERGENEW
+        # Load hyperparameters for the current dataset
+        best_classifiers = load_hyperparameters(var)
+
+        # Check if the hyperparameters for this dataset exist
+        if not best_classifiers:
+            # Tune hyperparameters if they do not exist
             best_classifiers = tune_hyperparameters(c, X_train, y_train)
-            print("Tuned hyperparameters:")
+            print("Tuned hyperparameters for dataset:", var)
             print(best_classifiers)
             # Save the best hyperparameters to file
-            save_hyperparameters(best_classifiers)
+            save_hyperparameters(best_classifiers, var)
+            # ON recharge pour éliminer estimator__svc__C
+            best_classifiers = load_hyperparameters(var)
 
-        # Load hyperparameters from file
-        best_classifiers = load_hyperparameters()
-        print("Loaded hyperparameters from file.")
+        print("Loaded hyperparameters for dataset:", var)
 
-
-
-
-        # Tune hyperparameters and get best classifiers
-        #best_classifiers = tune_hyperparameters(c, X_train, y_train)
-        #print(best_classifiers)
 
         # Evaluate the best classifiers
         for classifier_name, best_info in best_classifiers.items():
