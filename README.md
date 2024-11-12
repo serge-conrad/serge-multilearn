@@ -2,7 +2,8 @@
 
 pip install uv
 
-uv init testinvoke4/
+uv init serge-multilearn/
+cd serge-multilearn/
 uv add invoke
 uv add scikit-learn
 uv add scikit-multilearn-ng
