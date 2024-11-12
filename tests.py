@@ -20,7 +20,6 @@ def teststratkfold(c):
 
     mskf = MultilabelStratifiedKFold(n_splits=2, shuffle=True, random_state=0)
 
-    print("X",X)
     for train_index, test_index in mskf.split(X, y):
        print("TRAIN:", train_index, "TEST:", test_index)
 
