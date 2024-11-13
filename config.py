@@ -9,6 +9,15 @@ datasets = ["emotions", "yeast"]
 #available dataset {'delicious', 'genbase', 'Corel5k', 'mediamill', 'yeast', 'birds', 'rcv1subset4', 'rcv1subset5', 'enron', 'rcv1subset2', 'bibtex', 'medical', 'rcv1subset1', 'tmc2007_500', 'rcv1subset3', 'scene', 'emotions'}
 
 
+param_splitting = {
+    'standard',
+    'iterativestratification',
+}
+param_methods = {
+    'BinaryRelevance',
+    'OneVsRestClassifier'
+}
+
 # Define parameter grids for each classifier
 param_grids = {
     'DecisionTreeClassifier': {

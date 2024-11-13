@@ -10,7 +10,74 @@ from iterstrat.ml_stratifiers import MultilabelStratifiedKFold
 import numpy as np
 from skmultilearn.dataset import available_data_sets
 
+from config import PARAMS_FILE,datasets  # Import the global variable
+from data_preparation import prepare_data
+
+
+
+class CustomStratifiedKFold:
+    def __init__(self, n_splits=5, shuffle=True, random_state=None):
+        self.n_splits = n_splits
+        self.shuffle = shuffle
+        self.random_state = random_state
+        self.mskf = MultilabelStratifiedKFold(n_splits=self.n_splits, shuffle=self.shuffle, random_state=self.random_state)
+
+    def split(self, X, y):
+        for train_index, test_index in self.mskf.split(X, y):
+            X_train, y_train = X[train_index], y[train_index]
+
+            yield train_index, test_index
+
+    def get_n_splits(self, X, y, groups=None):
+        return self.n_splits
+
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_val_score
+
 @task
+def teststratcustom(c):
+    """Test : use Stratification multilabel on  datasets from scikit-multilearn-ng"""
+    print ("test stratification multi label")
+
+    for var in datasets:
+        # Prepare the data 
+        #uses of certain datasets provided by scikit-multilearn-ng
+        X_train, y_train_sparse, X_test, y_test_sparse = prepare_data(c, var)
+        y_train_dense = y_train_sparse.toarray()
+
+        # Instantiate custom generator
+        custom_cv = CustomStratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+
+        clf = RandomForestClassifier()
+
+        scores = cross_val_score(clf, X_train, y_train_dense, cv=custom_cv.split(X_train, y_train_dense))
+        print("Cross-validation scores with custom stratified oversampling:", scores)
+
+        #https://www.geeksforgeeks.org/creating-custom-cross-validation-generators-in-scikit-learn/
+        # use de iterative stratification sur le train set
+        #for train_index, test_index in mskf.split(X_train, y_train_dense):
+        #    # we have n_splits
+        #    print("SPLIT")
+        #    br_classifier = BinaryRelevance(DecisionTreeClassifier())
+    
+            #WHAT TO DO 
+            #NEXT
+
+            #br_grid_search = GridSearchCV(br_classifier, param_grid, cv=5, scoring='f1_micro')
+            #br_grid_search.fit(X_train, y_train_dense)
+            #best_br_params = {k.replace("classifier__", ""): v for k, v in br_grid_search.best_params_.items()}
+            #tuned_classifiers[f"{classifier_name}_BinaryRelevance"] = {
+            #    'classifier': br_grid_search.best_estimator_,
+            #    'params': best_br_params
+            #}
+            #print(f"Best hyperparameters for {classifier_name} (BinaryRelevance): {best_br_params}")
+
+
+            #print("TRAIN:", train_index, "TEST:", test_index)
+
+
+#@task
 def teststratkfold(c):
     """test MultilabelStratifiedKFold de iterative-stratification"""
 
@@ -29,7 +96,7 @@ def teststratkfold(c):
 
 
 from iterstrat.ml_stratifiers import RepeatedMultilabelStratifiedKFold
-@task
+#@task
 def testrepeatstratkfold(c):
     """test RepeatedMultilabelStratifiedKFold de iterative-stratification"""
     X = np.array([[1,2], [3,4], [1,2], [3,4], [1,2], [3,4], [1,2], [3,4]])
@@ -43,7 +110,7 @@ def testrepeatstratkfold(c):
        y_train, y_test = y[train_index], y[test_index]
 
 from iterstrat.ml_stratifiers import MultilabelStratifiedShuffleSplit
-@task
+#@task
 def testshuffle(c):
     """test MultilabelStratifiedShuffleSplit de iterative-stratification"""
 
@@ -59,7 +126,7 @@ def testshuffle(c):
 
 
 
-@task
+#@task
 def test0(c):
     """ check available_data_sets()"""
     dataset = set([x[0] for x in available_data_sets().keys()])
@@ -101,7 +168,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 from invoke import task
 
-@task
+#@task
 def test1(c):
     """ example BinaryRelevance( DecisionTreeClassifier()) avec GridSearchCV"""
 
