@@ -1,5 +1,6 @@
 # config.py
 PARAMS_FILE = 'best_hyperparameters.json'
+RESULT_FILE = 'results.txt'
 
 # List of datasets to evaluate
 datasets = ["emotions", "yeast"]

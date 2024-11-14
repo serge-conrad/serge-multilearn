@@ -1,43 +1,83 @@
 {
     "emotions": {
-        "DecisionTreeClassifier_BinaryRelevance": {
+        "DecisionTreeClassifier_BinaryRelevance_iterativestratification": {
             "params": {
                 "max_depth": 1
             }
         },
-        "RandomForestClassifier_BinaryRelevance": {
+        "DecisionTreeClassifier_BinaryRelevance_standard": {
+            "params": {
+                "max_depth": 1
+            }
+        },
+        "RandomForestClassifier_BinaryRelevance_iterativestratification": {
             "params": {
                 "max_depth": 3
             }
         },
-        "DecisionTreeClassifier_OneVsRestClassifier": {
+        "RandomForestClassifier_BinaryRelevance_standard": {
+            "params": {
+                "max_depth": 3
+            }
+        },
+        "DecisionTreeClassifier_OneVsRestClassifier_iterativestratification": {
             "params": {
                 "max_depth": 1
             }
         },
-        "RandomForestClassifier_OneVsRestClassifier": {
+        "DecisionTreeClassifier_OneVsRestClassifier_standard": {
+            "params": {
+                "max_depth": 1
+            }
+        },
+        "RandomForestClassifier_OneVsRestClassifier_iterativestratification": {
+            "params": {
+                "max_depth": 3
+            }
+        },
+        "RandomForestClassifier_OneVsRestClassifier_standard": {
             "params": {
                 "max_depth": 3
             }
         }
     },
     "yeast": {
-        "DecisionTreeClassifier_OneVsRestClassifier": {
+        "DecisionTreeClassifier_OneVsRestClassifier_standard": {
             "params": {
                 "max_depth": 3
             }
         },
-        "RandomForestClassifier_OneVsRestClassifier": {
+        "DecisionTreeClassifier_OneVsRestClassifier_iterativestratification": {
             "params": {
                 "max_depth": 3
             }
         },
-        "DecisionTreeClassifier_BinaryRelevance": {
+        "RandomForestClassifier_OneVsRestClassifier_standard": {
             "params": {
                 "max_depth": 3
             }
         },
-        "RandomForestClassifier_BinaryRelevance": {
+        "RandomForestClassifier_OneVsRestClassifier_iterativestratification": {
+            "params": {
+                "max_depth": 3
+            }
+        },
+        "DecisionTreeClassifier_BinaryRelevance_standard": {
+            "params": {
+                "max_depth": 3
+            }
+        },
+        "DecisionTreeClassifier_BinaryRelevance_iterativestratification": {
+            "params": {
+                "max_depth": 3
+            }
+        },
+        "RandomForestClassifier_BinaryRelevance_standard": {
+            "params": {
+                "max_depth": 3
+            }
+        },
+        "RandomForestClassifier_BinaryRelevance_iterativestratification": {
             "params": {
                 "max_depth": 3
             }

@@ -12,7 +12,7 @@ class CustomStratifiedKFold:
         self.random_state = random_state
         self.mskf = MultilabelStratifiedKFold(n_splits=self.n_splits, shuffle=self.shuffle, random_state=self.random_state)
 
-    def split(self, X, y):
+    def split(self, X, y, groups=None):  # Accept groups as an optional argument
         for train_index, test_index in self.mskf.split(X, y):
             X_train, y_train = X[train_index], y[train_index]
 

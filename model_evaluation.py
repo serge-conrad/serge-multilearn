@@ -6,14 +6,17 @@ from skmultilearn.problem_transform import BinaryRelevance
 from sklearn.pipeline import make_pipeline
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
+from config import RESULT_FILE  # Import the global variable
+
 
 @task
-def evaluate_pipeline(c, classifier, X_train, y_train, X_test, y_test):
-    print(f"Evaluating: {classifier}")
-    clf = BinaryRelevance(
-        classifier=classifier,
-        require_dense=[False, True]
-    )
+def evaluate_pipeline(c, dataset, classifier_name,best_params,classifier, X_train, y_train, X_test, y_test):
+    print(f"=========Evaluating: {classifier}")
+    clf=classifier
+    #clf = BinaryRelevance(
+    #    classifier=classifier,
+    #    require_dense=[False, True]
+    #)
 
     # Fit the model on the training data
     clf.fit(X_train, y_train)
@@ -36,6 +39,12 @@ def evaluate_pipeline(c, classifier, X_train, y_train, X_test, y_test):
 
     # AUC-PR Calculation
     auc_pr = average_precision_score(y_test_dense, predicted_probabilities_dense, average='macro')
+
+    print("èèèèèèèèè",clf)
+    with open(RESULT_FILE, "a") as file:
+        # Écrire toutes les valeurs sur une seule ligne
+        file.write(f"{dataset};{classifier_name};{best_params};{f1_micro};{auc_roc};{auc_pr}\n")
+
 
     # Print the evaluation results
     print("F1 Micro:", f1_micro)

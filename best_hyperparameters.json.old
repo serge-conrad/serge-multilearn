@@ -1,0 +1,46 @@
+{
+    "emotions": {
+        "DecisionTreeClassifier_BinaryRelevance": {
+            "params": {
+                "max_depth": 1
+            }
+        },
+        "RandomForestClassifier_BinaryRelevance": {
+            "params": {
+                "max_depth": 3
+            }
+        },
+        "DecisionTreeClassifier_OneVsRestClassifier": {
+            "params": {
+                "max_depth": 1
+            }
+        },
+        "RandomForestClassifier_OneVsRestClassifier": {
+            "params": {
+                "max_depth": 3
+            }
+        }
+    },
+    "yeast": {
+        "DecisionTreeClassifier_OneVsRestClassifier": {
+            "params": {
+                "max_depth": 3
+            }
+        },
+        "RandomForestClassifier_OneVsRestClassifier": {
+            "params": {
+                "max_depth": 3
+            }
+        },
+        "DecisionTreeClassifier_BinaryRelevance": {
+            "params": {
+                "max_depth": 3
+            }
+        },
+        "RandomForestClassifier_BinaryRelevance": {
+            "params": {
+                "max_depth": 3
+            }
+        }
+    }
+}
