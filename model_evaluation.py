@@ -40,7 +40,6 @@ def evaluate_pipeline(c, dataset, classifier_name,best_params,classifier, X_trai
     # AUC-PR Calculation
     auc_pr = average_precision_score(y_test_dense, predicted_probabilities_dense, average='macro')
 
-    print("èèèèèèèèè",clf)
     with open(RESULT_FILE, "a") as file:
         # Écrire toutes les valeurs sur une seule ligne
         file.write(f"{dataset};{classifier_name};{best_params};{f1_micro};{auc_roc};{auc_pr}\n")
