@@ -1,25 +1,17 @@
 dataset;classifier;params;f1_micro;auc_roc;auc_pr;debug
-emotions;DecisionTreeClassifier_BinaryRelevance_iterativestratification;{'max_depth': 1};0.5934343434343434;0.6896805582098712;0.48469626177284114;BinaryRelevance(classifier=DecisionTreeClassifier(max_depth=1),
-                require_dense=[True, True])
-emotions;DecisionTreeClassifier_BinaryRelevance_standard;{'max_depth': 1};0.5934343434343434;0.6896805582098712;0.48469626177284114;BinaryRelevance(classifier=DecisionTreeClassifier(max_depth=1),
-                require_dense=[True, True])
-emotions;RandomForestClassifier_BinaryRelevance_iterativestratification;{'max_depth': 3};0.576271186440678;0.8320953231146784;0.7179798663925467;BinaryRelevance(classifier=RandomForestClassifier(max_depth=3),
-                require_dense=[True, True])
-emotions;RandomForestClassifier_BinaryRelevance_standard;{'max_depth': 3};0.5978755690440061;0.8316507203711451;0.7124359479058623;BinaryRelevance(classifier=RandomForestClassifier(max_depth=3),
-                require_dense=[True, True])
-emotions;DecisionTreeClassifier_OneVsRestClassifier_iterativestratification;{'max_depth': 1};0.5934343434343434;0.6896805582098712;0.48469626177284114;OneVsRestClassifier(estimator=DecisionTreeClassifier(max_depth=1))
-emotions;DecisionTreeClassifier_OneVsRestClassifier_standard;{'max_depth': 1};0.5934343434343434;0.6896805582098712;0.48469626177284114;OneVsRestClassifier(estimator=DecisionTreeClassifier(max_depth=1))
-emotions;RandomForestClassifier_OneVsRestClassifier_iterativestratification;{'max_depth': 3};0.6012084592145015;0.832831553047018;0.72190432846523;OneVsRestClassifier(estimator=RandomForestClassifier(max_depth=3))
-emotions;RandomForestClassifier_OneVsRestClassifier_standard;{'max_depth': 3};0.5900151285930408;0.8228104764849636;0.711753050226184;OneVsRestClassifier(estimator=RandomForestClassifier(max_depth=3))
-yeast;DecisionTreeClassifier_OneVsRestClassifier_standard;{'max_depth': 3};0.5799054034685395;0.5940702750597237;0.3811409658721251;OneVsRestClassifier(estimator=DecisionTreeClassifier(max_depth=3))
-yeast;DecisionTreeClassifier_OneVsRestClassifier_iterativestratification;{'max_depth': 3};0.5808117022802237;0.5950117476210744;0.3822411030787972;OneVsRestClassifier(estimator=DecisionTreeClassifier(max_depth=3))
-yeast;RandomForestClassifier_OneVsRestClassifier_standard;{'max_depth': 3};0.5717928286852589;0.6801347506967564;0.4829349026806674;OneVsRestClassifier(estimator=RandomForestClassifier(max_depth=3))
-yeast;RandomForestClassifier_OneVsRestClassifier_iterativestratification;{'max_depth': 3};0.5696425709248277;0.6860905126147231;0.47782618881690864;OneVsRestClassifier(estimator=RandomForestClassifier(max_depth=3))
-yeast;DecisionTreeClassifier_BinaryRelevance_standard;{'max_depth': 3};0.5793775993116306;0.5941425722181036;0.3808546133710057;BinaryRelevance(classifier=DecisionTreeClassifier(max_depth=3),
-                require_dense=[True, True])
-yeast;DecisionTreeClassifier_BinaryRelevance_iterativestratification;{'max_depth': 3};0.580895008605852;0.5947804050959951;0.3820703161409022;BinaryRelevance(classifier=DecisionTreeClassifier(max_depth=3),
-                require_dense=[True, True])
-yeast;RandomForestClassifier_BinaryRelevance_standard;{'max_depth': 3};0.5703798276412384;0.6776408012581222;0.480851731139114;BinaryRelevance(classifier=RandomForestClassifier(max_depth=3),
-                require_dense=[True, True])
-yeast;RandomForestClassifier_BinaryRelevance_iterativestratification;{'max_depth': 3};0.568727971803909;0.6847291070121441;0.48172620009217565;BinaryRelevance(classifier=RandomForestClassifier(max_depth=3),
-                require_dense=[True, True])
+emotions;DecisionTreeClassifier_BinaryRelevance_iterativestratification;{'max_depth': 1};0.5934343434343434;0.6896805582098712;0.48469626177284114
+emotions;DecisionTreeClassifier_BinaryRelevance_standard;{'max_depth': 1};0.5934343434343434;0.6896805582098712;0.48469626177284114
+emotions;RandomForestClassifier_BinaryRelevance_iterativestratification;{'max_depth': 3};0.5978755690440061;0.8280475368525521;0.7101523471086809
+emotions;RandomForestClassifier_BinaryRelevance_standard;{'max_depth': 3};0.5990922844175491;0.830834226169428;0.7201238251200653
+emotions;DecisionTreeClassifier_OneVsRestClassifier_iterativestratification;{'max_depth': 1};0.5934343434343434;0.6896805582098712;0.48469626177284114
+emotions;DecisionTreeClassifier_OneVsRestClassifier_standard;{'max_depth': 1};0.5934343434343434;0.6896805582098712;0.48469626177284114
+emotions;RandomForestClassifier_OneVsRestClassifier_iterativestratification;{'max_depth': 3};0.593607305936073;0.8280931464390194;0.720309976435001
+emotions;RandomForestClassifier_OneVsRestClassifier_standard;{'max_depth': 3};0.5932721712538226;0.8306556047930193;0.7150910472755174
+yeast;DecisionTreeClassifier_OneVsRestClassifier_standard;{'max_depth': 3};0.5803123656684339;0.5941990103420431;0.3808739761094216
+yeast;DecisionTreeClassifier_OneVsRestClassifier_iterativestratification;{'max_depth': 3};0.5802008608321377;0.5947751004224946;0.3821725983205659
+yeast;RandomForestClassifier_OneVsRestClassifier_standard;{'max_depth': 3};0.5673690932311622;0.6839746329036668;0.4820519733155226
+yeast;RandomForestClassifier_OneVsRestClassifier_iterativestratification;{'max_depth': 3};0.5685522531160115;0.6878090101878739;0.47851219475035567
+yeast;DecisionTreeClassifier_BinaryRelevance_standard;{'max_depth': 3};0.5802008608321377;0.5947717691379012;0.38189874362828025
+yeast;DecisionTreeClassifier_BinaryRelevance_iterativestratification;{'max_depth': 3};0.5810985228739424;0.5948849857276622;0.38213169194939317
+yeast;RandomForestClassifier_BinaryRelevance_standard;{'max_depth': 3};0.5700591148745806;0.6893203397290897;0.4848859184367179
+yeast;RandomForestClassifier_BinaryRelevance_iterativestratification;{'max_depth': 3};0.567952617256283;0.6812994830965753;0.48530052202227697

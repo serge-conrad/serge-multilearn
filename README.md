@@ -10,6 +10,7 @@ sconrad@flyon:~/serge-multilearn$ uv add scikit-learn
 Using CPython 3.11.10
 Creating virtual environment at: .venv
 
+oarsub -I
 source .venv/bin/activate
 invoke -l 
 invoke run-all

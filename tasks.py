@@ -20,6 +20,7 @@ from tests import teststratcustom
 
 import json
 import os
+import time
 from invoke import task
 from data_preparation import prepare_data
 from tune_hyperparameters import tune_hyperparameters,load_hyperparameters,save_hyperparameters
@@ -78,6 +79,7 @@ from skmultilearn.problem_transform import BinaryRelevance
 def run_all(c):
     """Run all evaluations for all classifiers and datasets."""
 
+    start_time = time.time()
     with open(RESULT_FILE, 'w') as file:
         file.write("dataset;classifier;params;f1_micro;auc_roc;auc_pr;debug\n")
     for var in datasets:
@@ -112,6 +114,11 @@ def run_all(c):
                     best_classifier = create_classifier(classifier_name, best_params)
                     print(f"Evaluating classifier: {classifier_name} with parameters: {best_params}")
                     evaluate_pipeline(c, var,classifier_name,best_params,best_classifier, X_train, y_train, X_test, y_test)
+
+    end_time = time.time()
+
+    # Affiche le temps d'exécution
+    print(f"Temps d'exécution : {end_time - start_time} secondes")
 
 
 
