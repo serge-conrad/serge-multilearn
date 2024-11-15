@@ -102,7 +102,7 @@ def tune_hyperparameters(c, X_train, y_train):
                     if method=="OneVsRestClassifier" :
                         # We change the param grid to estimator
                         param_grid = {k.replace('classifier__', 'estimator__'): v for k, v in param_grid.items()}
-                    grid_search = GridSearchCV(classifier, param_grid, cv=5, scoring='f1_micro')
+                    grid_search = GridSearchCV(classifier, param_grid, cv=5, scoring='f1_micro',n_jobs=-1)
                     grid_search.fit(X_train, y_train_dense)
 
                     if method=="OneVsRestClassifier" :
@@ -123,7 +123,7 @@ def tune_hyperparameters(c, X_train, y_train):
                     if method=="OneVsRestClassifier" :
                         # We change the param grid to estimator
                         param_grid = {k.replace('classifier__', 'estimator__'): v for k, v in param_grid.items()}
-                    grid_search = GridSearchCV(classifier, param_grid, cv=custom_cv, scoring='f1_micro')
+                    grid_search = GridSearchCV(classifier, param_grid, cv=custom_cv, scoring='f1_micro',n_jobs=-1)
                     grid_search.fit(X_train, y_train_dense)
                     if method=="OneVsRestClassifier" :
                         best_params = {k.replace("estimator__", ""): v for k, v in grid_search.best_params_.items()}
