@@ -11,7 +11,6 @@ from config import RESULT_FILE  # Import the global variable
 
 @task
 def evaluate_pipeline(c, dataset, classifier_name,best_params,classifier, X_train, y_train, X_test, y_test):
-    print(f"=========Evaluating: {classifier}")
     clf=classifier
     #clf = BinaryRelevance(
     #    classifier=classifier,
@@ -46,7 +45,7 @@ def evaluate_pipeline(c, dataset, classifier_name,best_params,classifier, X_trai
 
 
     # Print the evaluation results
-    print("F1 Micro:", f1_micro)
-    print("AUC-ROC:", auc_roc)
-    print("AUC-PR:", auc_pr)
+    #print("F1 Micro:", f1_micro)
+    #print("AUC-ROC:", auc_roc)
+    #print("AUC-PR:", auc_pr)
 

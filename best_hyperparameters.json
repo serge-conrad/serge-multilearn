@@ -1,18 +1,13 @@
 {
     "emotions": {
-        "DecisionTreeClassifier_BinaryRelevance_standard": {
-            "params": {
-                "max_depth": 1
-            }
-        },
         "DecisionTreeClassifier_BinaryRelevance_iterativestratification": {
             "params": {
                 "max_depth": 1
             }
         },
-        "RandomForestClassifier_BinaryRelevance_standard": {
+        "DecisionTreeClassifier_BinaryRelevance_standard": {
             "params": {
-                "max_depth": 3
+                "max_depth": 1
             }
         },
         "RandomForestClassifier_BinaryRelevance_iterativestratification": {
@@ -20,9 +15,9 @@
                 "max_depth": 3
             }
         },
-        "DecisionTreeClassifier_OneVsRestClassifier_standard": {
+        "RandomForestClassifier_BinaryRelevance_standard": {
             "params": {
-                "max_depth": 1
+                "max_depth": 3
             }
         },
         "DecisionTreeClassifier_OneVsRestClassifier_iterativestratification": {
@@ -30,12 +25,17 @@
                 "max_depth": 1
             }
         },
-        "RandomForestClassifier_OneVsRestClassifier_standard": {
+        "DecisionTreeClassifier_OneVsRestClassifier_standard": {
+            "params": {
+                "max_depth": 1
+            }
+        },
+        "RandomForestClassifier_OneVsRestClassifier_iterativestratification": {
             "params": {
                 "max_depth": 3
             }
         },
-        "RandomForestClassifier_OneVsRestClassifier_iterativestratification": {
+        "RandomForestClassifier_OneVsRestClassifier_standard": {
             "params": {
                 "max_depth": 3
             }

@@ -1,6 +1,4 @@
 SRV LOCAL
-tune hyperparameter temps d'exécution : 462 secondes
-Temps d'exécution : 311.100878238678 secondes
 Temps d'exécution : 120.65919303894043 secondes
 
 
@@ -9,6 +7,7 @@ do not tune hyperparameter temps d'exécution : 42 secondes
 
 GRID 5000
 tune hyperparameter temps d'exécution : 561 secondes
+nova 41 secondes
 do not tune hyperparameter temps d'exécution : 53 secondes
 
 

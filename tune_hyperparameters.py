@@ -91,8 +91,6 @@ def tune_hyperparameters(c, X_train, y_train):
             ## DIFFERENCE
             # la methode BinaryRelevance implique un classifier.get_params() : classifier__max_depth
             # la methode OneVsRestClassifier implique un classifier.get_params() : estimator__max_depth
-            print ("method",method)
-            print ("classifier",classifier_name)
 
 
             for splitting in param_splitting:
@@ -113,10 +111,8 @@ def tune_hyperparameters(c, X_train, y_train):
                         'classifier': grid_search.best_estimator_,
                         'params': best_params
                     }
-                    print(f"Best hyperparameters for {splitting} {classifier_name} {method}: {best_params}")
 
                 elif (splitting=="iterativestratification"):
-                    print("iterative")
                     custom_cv = CustomStratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
                     #clf = RandomForestClassifier()
@@ -134,10 +130,11 @@ def tune_hyperparameters(c, X_train, y_train):
                         'classifier': grid_search.best_estimator_,
                         'params': best_params
                     }
+                print(f"Best hyperparameters for {splitting} {classifier_name} {method}: {best_params}")
 
 
 
-    print("=======================================================")
+
     return tuned_classifiers
 
 #    for classifier_name, param_grid in param_grids.items():

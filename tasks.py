@@ -83,21 +83,26 @@ def run_all(c):
     with open(RESULT_FILE, 'w') as file:
         file.write("dataset;classifier;params;f1_micro;auc_roc;auc_pr;debug\n")
     for var in datasets:
+        print("working on dataset ",var)
         # Prepare the data
         # do basically a load_dataset from skmultilearn
         X_train, y_train, X_test, y_test = prepare_data(c, var)
 
 
+        #for classifier_name, param_grid in param_grids.items():
+
         # Load hyperparameters for the current dataset
         # they are stored in a json file best_hyperparameters.json
         best_classifiers = load_hyperparameters(var)
 
+        # permet de rajouter des dataset 
         # Check if the json file do not exist
         if not best_classifiers:
+
+                    print("Calculating Tuned hyperparameters for dataset:", var)
                     # Calculating best hyperparameters for the dataset
                     # Tune hyperparameters if they do not exist
                     best_classifiers = tune_hyperparameters(c, X_train, y_train)
-                    print("Tuned hyperparameters for dataset:", var)
                     # Save the best hyperparameters to file
                     save_hyperparameters(best_classifiers, var)
                     # ON recharge pour éliminer estimator__svc__C
@@ -108,7 +113,6 @@ def run_all(c):
 
         # Evaluate the best classifiers
         for classifier_name, best_info in best_classifiers.items():
-                    print(classifier_name,best_info)
                     best_params = best_info['params']
                     # Recreate the classifier with the best parameters
                     best_classifier = create_classifier(classifier_name, best_params)
