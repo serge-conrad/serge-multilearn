@@ -31,28 +31,30 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV
 from sklearn.multioutput import MultiOutputClassifier
-from config import PARAMS_FILE,RESULT_FILE,datasets  # Import the global variable
+from config import PARAMS_FILE,RESULT_FILE,datasets,param_grids  # Import the global variable
+
 from sklearn.neural_network import MLPClassifier
 
 
 from iterativeStratification import CustomStratifiedKFold
 
 
-def create_classifier(classifier_name, params):
+def create_classifier(classifier_name,method, params):
 #make_pipeline(StandardScaler(with_mean=False), SVC(probability=True)),
 #    DecisionTreeClassifier()
+    #classifier_name,BinaryRelevance_iterativestratification
 
     """Reconstruct the classifier based on its type and parameters."""
     if classifier_name == 'SVC':
         classifier = make_pipeline(StandardScaler(with_mean=False), SVC(probability=True, **params))
-    elif classifier_name.startswith('DecisionTreeClassifier_BinaryRelevance'):
+    elif classifier_name=='DecisionTreeClassifier' and method.startswith('BinaryRelevance'):
         classifier = BinaryRelevance( DecisionTreeClassifier(**params) )
-    elif classifier_name.startswith('DecisionTreeClassifier_OneVsRestClassifier'):
+    elif classifier_name=='DecisionTreeClassifier' and method.startswith('OneVsRestClassifier'):
         classifier = OneVsRestClassifier(DecisionTreeClassifier(**params))
         #classifier = DecisionTreeClassifier(**params)
-    elif classifier_name.startswith('RandomForestClassifier_BinaryRelevance'):
+    elif classifier_name=='RandomForestClassifier' and method.startswith('BinaryRelevance'):
         classifier = BinaryRelevance( RandomForestClassifier(**params) )
-    elif classifier_name.startswith('RandomForestClassifier_OneVsRestClassifier'):
+    elif classifier_name=='RandomForestClassifier' and method.startswith('OneVsRestClassifier'):
         classifier = OneVsRestClassifier(RandomForestClassifier(**params))
 
 
@@ -81,7 +83,7 @@ def run_all(c):
 
     start_time = time.time()
     with open(RESULT_FILE, 'w') as file:
-        file.write("dataset;classifier;params;f1_micro;auc_roc;auc_pr;debug\n")
+        file.write("dataset;classifier;method;params;f1_micro;auc_roc;auc_pr;debug\n")
     for var in datasets:
         print("working on dataset ",var)
         # Prepare the data
@@ -89,35 +91,39 @@ def run_all(c):
         X_train, y_train, X_test, y_test = prepare_data(c, var)
 
 
-        #for classifier_name, param_grid in param_grids.items():
+        for classifier_name, param_grid in param_grids.items():
 
-        # Load hyperparameters for the current dataset
-        # they are stored in a json file best_hyperparameters.json
-        best_classifiers = load_hyperparameters(var)
 
-        # permet de rajouter des dataset 
-        # Check if the json file do not exist
-        if not best_classifiers:
+            # Load hyperparameters for the current dataset
+            # they are stored in a json file best_hyperparameters.json
+            best_classifiers = load_hyperparameters(var,classifier_name)
 
-                    print("Calculating Tuned hyperparameters for dataset:", var)
+            # permet de rajouter des dataset 
+            # Check if the json file do not exist
+            if not best_classifiers:
+
+                    print("Calculating Tuned hyperparameters for dataset and classifier:", var,classifier_name)
                     # Calculating best hyperparameters for the dataset
                     # Tune hyperparameters if they do not exist
-                    best_classifiers = tune_hyperparameters(c, X_train, y_train)
+                    print (classifier_name)
+                    print(param_grid)
+                    best_classifiers = tune_hyperparameters(c, X_train, y_train,classifier_name,param_grid)
+                    print('===========')
                     # Save the best hyperparameters to file
-                    save_hyperparameters(best_classifiers, var)
+                    save_hyperparameters(best_classifiers, var,classifier_name)
                     # ON recharge pour éliminer estimator__svc__C
-                    best_classifiers = load_hyperparameters(var)
+                    best_classifiers = load_hyperparameters(var,classifier_name)
     
-        print("Loaded hyperparameters for dataset:", var)
+            print("Loaded hyperparameters for dataset and classifier:", var,classifier_name)
 
 
-        # Evaluate the best classifiers
-        for classifier_name, best_info in best_classifiers.items():
+            # Evaluate the best classifiers
+            for method, best_info in best_classifiers.items():
                     best_params = best_info['params']
                     # Recreate the classifier with the best parameters
-                    best_classifier = create_classifier(classifier_name, best_params)
-                    print(f"Evaluating classifier: {classifier_name} with parameters: {best_params}")
-                    evaluate_pipeline(c, var,classifier_name,best_params,best_classifier, X_train, y_train, X_test, y_test)
+                    best_classifier = create_classifier(classifier_name,method, best_params)
+                    print(f"Evaluating classifier: {classifier_name} method: {method} with parameters: {best_params}")
+                    evaluate_pipeline(c, var,classifier_name,method,best_params,best_classifier, X_train, y_train, X_test, y_test)
 
     end_time = time.time()
 

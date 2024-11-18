@@ -10,7 +10,7 @@ from config import RESULT_FILE  # Import the global variable
 
 
 @task
-def evaluate_pipeline(c, dataset, classifier_name,best_params,classifier, X_train, y_train, X_test, y_test):
+def evaluate_pipeline(c, dataset, classifier_name,method,best_params,classifier, X_train, y_train, X_test, y_test):
     clf=classifier
     #clf = BinaryRelevance(
     #    classifier=classifier,
@@ -41,7 +41,7 @@ def evaluate_pipeline(c, dataset, classifier_name,best_params,classifier, X_trai
 
     with open(RESULT_FILE, "a") as file:
         # Écrire toutes les valeurs sur une seule ligne
-        file.write(f"{dataset};{classifier_name};{best_params};{f1_micro};{auc_roc};{auc_pr}\n")
+        file.write(f"{dataset};{classifier_name};{method};{best_params};{f1_micro};{auc_roc};{auc_pr}\n")
 
 
     # Print the evaluation results
