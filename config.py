@@ -27,6 +27,9 @@ param_grids = {
     'RandomForestClassifier': {
         'classifier__max_depth': [1,2,3],
     },
+    'MLPClassifier': {
+        'classifier__hidden_layer_sizes': [(10,), (50,), (100,)],  # Different hidden layer sizes
+    }
 }
 #    'MLPClassifier': {
 #        'classifier__hidden_layer_sizes': [(10,), (50,), (100,)],  # Different hidden layer sizes

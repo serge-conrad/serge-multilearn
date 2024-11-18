@@ -164,6 +164,13 @@ def tune_hyperparameters(c, X_train, y_train,classifier_name,param_grid_ori):
                 classifier = OneVsRestClassifier(DecisionTreeClassifier())
             elif (method=="OneVsRestClassifier") and  (classifier_name == 'RandomForestClassifier'):
                 classifier = OneVsRestClassifier(RandomForestClassifier())
+            elif (method=="OneVsRestClassifier") and  (classifier_name == 'MLPClassifier'):
+                classifier = OneVsRestClassifier(MLPClassifier())
+            elif (method=="BinaryRelevance") and  (classifier_name == 'MLPClassifier'):
+                classifier = BinaryRelevance(MLPClassifier())
+            else:
+                print("ERREUR CODE 2")
+
             ## DIFFERENCE
             # la methode BinaryRelevance implique un classifier.get_params() : classifier__max_depth
             # la methode OneVsRestClassifier implique un classifier.get_params() : estimator__max_depth

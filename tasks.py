@@ -56,6 +56,10 @@ def create_classifier(classifier_name,method, params):
         classifier = BinaryRelevance( RandomForestClassifier(**params) )
     elif classifier_name=='RandomForestClassifier' and method.startswith('OneVsRestClassifier'):
         classifier = OneVsRestClassifier(RandomForestClassifier(**params))
+    elif classifier_name=='MLPClassifier' and method.startswith('BinaryRelevance'):
+        classifier = BinaryRelevance(MLPClassifier (**params) )
+    elif classifier_name=='MLPClassifier' and method.startswith('OneVsRestClassifier'):
+        classifier = OneVsRestClassifier(MLPClassifier(**params))
 
 
 
@@ -63,8 +67,6 @@ def create_classifier(classifier_name,method, params):
 
     elif classifier_name == 'GaussianNB':
        classifier = BinaryRelevance( GaussianNB(**params) )
-    elif classifier_name == 'MLPClassifier':
-        classifier = BinaryRelevance(MLPClassifier(**params))
 
 
 

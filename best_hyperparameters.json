@@ -43,6 +43,36 @@
                     "max_depth": 3
                 }
             }
+        },
+        "MLPClassifier": {
+            "BinaryRelevance_iterativestratification": {
+                "params": {
+                    "hidden_layer_sizes": [
+                        100
+                    ]
+                }
+            },
+            "BinaryRelevance_standard": {
+                "params": {
+                    "hidden_layer_sizes": [
+                        100
+                    ]
+                }
+            },
+            "OneVsRestClassifier_iterativestratification": {
+                "params": {
+                    "hidden_layer_sizes": [
+                        100
+                    ]
+                }
+            },
+            "OneVsRestClassifier_standard": {
+                "params": {
+                    "hidden_layer_sizes": [
+                        100
+                    ]
+                }
+            }
         }
     },
     "yeast": {
