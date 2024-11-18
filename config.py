@@ -19,6 +19,9 @@ param_methods = {
     'OneVsRestClassifier'
 }
 
+#   'classifier__n_estimators': [100, 200, 500],  # Number of trees in the forest.
+#    'classifier__max_depth': [None, 10, 20, 30],  # Maximum depth of each tree.
+
 # Define parameter grids for each classifier
 param_grids = {
     'DecisionTreeClassifier': {

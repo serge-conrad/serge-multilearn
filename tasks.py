@@ -93,6 +93,7 @@ def run_all(c):
         X_train, y_train, X_test, y_test = prepare_data(c, var)
 
 
+        # pour les classificateurs dans le fichier config
         for classifier_name, param_grid in param_grids.items():
 
 
