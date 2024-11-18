@@ -19,21 +19,19 @@ param_methods = {
     'OneVsRestClassifier'
 }
 
-#   'classifier__n_estimators': [100, 200, 500],  # Number of trees in the forest.
-#    'classifier__max_depth': [None, 10, 20, 30],  # Maximum depth of each tree.
-
-# Define parameter grids for each classifier
+# IT IS POSSIBLE TO ADD new classifier.
+# If we add more hyperparameter, the program will recalcule the bests hyperparameters.
+# but if we remove some hyperparameter the program will do nothing
+# Remove the file best_hyperparameters.json for recalculate
 param_grids = {
     'DecisionTreeClassifier': {
-        'classifier__max_depth': [1,2,3],
+        'max_depth': [1,2,3],
     },
     'RandomForestClassifier': {
-        'classifier__max_depth': [1,2,3],
+        'max_depth': [1,2,3],
     },
-    'MLPClassifier': {
-        'classifier__hidden_layer_sizes': [(10,), (50,), (100,)],  # Different hidden layer sizes
-    }
 }
+#'n_estimators': [100, 200, 500],  # Number of trees in the forest.
 #    'MLPClassifier': {
 #        'classifier__hidden_layer_sizes': [(10,), (50,), (100,)],  # Different hidden layer sizes
 #        'classifier__max_iter': [100, 200, 300]  # Maximum iterations
