@@ -12,19 +12,20 @@ do not tune hyperparameter temps d'exécution : 53 secondes
 
 
 # SUR GRID 5000
-curl -LsSf https://astral.sh/uv/install.sh | sh
-source $HOME/.local/bin/env (or restart shell)
-cd serge-multilearn/
-uv add scikit-learn
+  - curl -LsSf https://astral.sh/uv/install.sh | sh
+  - source $HOME/.local/bin/env (or restart shell)
+  - cd serge-multilearn/
+  - uv add scikit-learn
 
-sconrad@flyon:~/serge-multilearn$ uv add scikit-learn
+  - sconrad@flyon:~/serge-multilearn$ uv add scikit-learn
 Using CPython 3.11.10
 Creating virtual environment at: .venv
 
-oarsub -I
-source .venv/bin/activate
-invoke -l 
-invoke run-all
+  - oarsub -I
+  - source .venv/bin/activate
+  - invoke -l 
+  - invoke run-all
+
 
  # Installation de uv:
 
