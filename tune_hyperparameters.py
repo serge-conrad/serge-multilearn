@@ -160,7 +160,7 @@ def tune_hyperparameters(c, X_train, y_train,classifier_name,param_grid_ori):
                 classifier = BinaryRelevance(DecisionTreeClassifier())
             elif (method=="BinaryRelevance") and  (classifier_name == 'RandomForestClassifier'):
                 classifier = BinaryRelevance(RandomForestClassifier())
-            if (method=="OneVsRestClassifier") and  (classifier_name == 'DecisionTreeClassifier'):
+            elif (method=="OneVsRestClassifier") and  (classifier_name == 'DecisionTreeClassifier'):
                 classifier = OneVsRestClassifier(DecisionTreeClassifier())
             elif (method=="OneVsRestClassifier") and  (classifier_name == 'RandomForestClassifier'):
                 classifier = OneVsRestClassifier(RandomForestClassifier())
@@ -169,7 +169,7 @@ def tune_hyperparameters(c, X_train, y_train,classifier_name,param_grid_ori):
             elif (method=="BinaryRelevance") and  (classifier_name == 'MLPClassifier'):
                 classifier = BinaryRelevance(MLPClassifier())
             else:
-                print("ERREUR CODE 2")
+                print("ERREUR CODE 2",method,classifier_name)
 
             ## DIFFERENCE
             # la methode BinaryRelevance implique un classifier.get_params() : classifier__max_depth
@@ -182,9 +182,11 @@ def tune_hyperparameters(c, X_train, y_train,classifier_name,param_grid_ori):
 
                     if method=="OneVsRestClassifier" :
                         # We change the param grid to estimator
-                        param_grid = {k.replace('classifier__', 'estimator__'): v for k, v in param_grid_ori.items()}
+                        #param_grid = {k.replace('classifier__', 'estimator__'): v for k, v in param_grid_ori.items()}
+                        param_grid = {f"estimator__{k}": v for k, v in param_grid_ori.items()}
                     else:
-                        param_grid =  param_grid_ori
+                        #param_grid =  param_grid_ori
+                        param_grid = {f"classifier__{k}": v for k, v in param_grid_ori.items()}
                     grid_search = GridSearchCV(classifier, param_grid, cv=5, scoring='f1_micro',n_jobs=-1)
                     grid_search.fit(X_train, y_train_dense)
 
@@ -203,9 +205,11 @@ def tune_hyperparameters(c, X_train, y_train,classifier_name,param_grid_ori):
                     #clf = RandomForestClassifier()
                     if method=="OneVsRestClassifier" :
                         # We change the param grid to estimator
-                        param_grid = {k.replace('classifier__', 'estimator__'): v for k, v in param_grid_ori.items()}
+                        #param_grid = {k.replace('classifier__', 'estimator__'): v for k, v in param_grid_ori.items()}
+                        param_grid = {f"estimator__{k}": v for k, v in param_grid_ori.items()}
                     else:
-                        param_grid =  param_grid_ori
+                        #param_grid =  param_grid_ori
+                        param_grid = {f"classifier__{k}": v for k, v in param_grid_ori.items()}
                     grid_search = GridSearchCV(classifier, param_grid, cv=custom_cv, scoring='f1_micro',n_jobs=-1)
                     grid_search.fit(X_train, y_train_dense)
                     if method=="OneVsRestClassifier" :
@@ -222,49 +226,6 @@ def tune_hyperparameters(c, X_train, y_train,classifier_name,param_grid_ori):
 
 
     return tuned_classifiers
-
-#    for classifier_name, param_grid in param_grids.items():
-#        # Initialize BinaryRelevance
-#        if classifier_name == 'DecisionTreeClassifier':
-#            br_classifier = BinaryRelevance(DecisionTreeClassifier())
-#            ovr_classifier = OneVsRestClassifier(DecisionTreeClassifier())
-#        elif classifier_name == 'RandomForestClassifier':
-#            br_classifier = BinaryRelevance(RandomForestClassifier())
-#            ovr_classifier = OneVsRestClassifier(RandomForestClassifier())
-#
-#        elif classifier_name == 'GaussianNB':
-#            br_classifier = BinaryRelevance(GaussianNB())
-#            ovr_classifier = OneVsRestClassifier(GaussianNB())
-#        elif classifier_name == 'MLPClassifier':
-#            br_classifier = BinaryRelevance(MLPClassifier())
-#            ovr_classifier = OneVsRestClassifier(MLPClassifier())
-#        else:
-#            continue  # Skip if classifier is not recognized
-#
-#        # Perform hyperparameter tuning for BinaryRelevance
-#        br_grid_search = GridSearchCV(br_classifier, param_grid, cv=5, scoring='f1_micro')
-#        br_grid_search.fit(X_train, y_train_dense)
-#        best_br_params = {k.replace("classifier__", ""): v for k, v in br_grid_search.best_params_.items()}
-#        tuned_classifiers[f"{classifier_name}_BinaryRelevance"] = {
-#            'classifier': br_grid_search.best_estimator_,
-#            'params': best_br_params
-#        }
-#        print(f"Best hyperparameters for {classifier_name} (BinaryRelevance): {best_br_params}")
-#
-#        # Perform hyperparameter tuning for OneVsRestClassifier
-#        #{'classifier__max_depth': [1, 2, 3]}
-#
-#        ovr_param_grid = {k.replace('classifier__', 'estimator__'): v for k, v in param_grid.items()}
-#        ovr_grid_search = GridSearchCV(ovr_classifier, ovr_param_grid, cv=5, scoring='f1_micro')
-#        ovr_grid_search.fit(X_train, y_train_dense)
-#        best_ovr_params = {k.replace("estimator__", ""): v for k, v in ovr_grid_search.best_params_.items()}
-#        tuned_classifiers[f"{classifier_name}_OneVsRest"] = {
-#           'classifier': ovr_grid_search.best_estimator_,
-#           'params': best_ovr_params
-#       }
-#       print(f"Best hyperparameters for {classifier_name} (OneVsRest): {best_ovr_params}")
-#
-#    return tuned_classifiers
 
 
 

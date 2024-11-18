@@ -76,6 +76,31 @@ def create_classifier(classifier_name,method, params):
     return classifier
 
 
+
+
+def check_all_params_exist(param_grids, existing_hyperparameters):
+    missing_params = []
+
+
+    #print(param_grids)
+    #{'max_depth': [1, 2, 3]}
+
+    #print(existing_hyperparameters)
+
+    # Pour chaque classificateur et ses paramètres dans param_grids
+    for hyperparameter, grid in param_grids.items():
+        # Vérifier si ce paramètre est dans les hyperparamètres existants pour ce classificateur
+        recalculate = False
+        for var_name, var_data in existing_hyperparameters.items():
+                if (hyperparameter not in var_data['params']):
+                    recalculate = True
+                    break
+
+
+    return recalculate 
+
+
+
 from config import param_splitting  # Import the global variable
 
 from skmultilearn.problem_transform import BinaryRelevance
@@ -93,13 +118,13 @@ def run_all(c):
         X_train, y_train, X_test, y_test = prepare_data(c, var)
 
 
+        # pour les classificateurs dans le fichier config
         for classifier_name, param_grid in param_grids.items():
 
 
             # Load hyperparameters for the current dataset
             # they are stored in a json file best_hyperparameters.json
             best_classifiers = load_hyperparameters(var,classifier_name)
-
             # permet de rajouter des dataset 
             # Check if the json file do not exist
             if not best_classifiers:
@@ -107,14 +132,19 @@ def run_all(c):
                     print("Calculating Tuned hyperparameters for dataset and classifier:", var,classifier_name)
                     # Calculating best hyperparameters for the dataset
                     # Tune hyperparameters if they do not exist
-                    print (classifier_name)
-                    print(param_grid)
                     best_classifiers = tune_hyperparameters(c, X_train, y_train,classifier_name,param_grid)
-                    print('===========')
                     # Save the best hyperparameters to file
                     save_hyperparameters(best_classifiers, var,classifier_name)
                     # ON recharge pour éliminer estimator__svc__C
                     best_classifiers = load_hyperparameters(var,classifier_name)
+            else:
+                # json file present
+                # checking if all hyperparameter are present
+                missing_params = check_all_params_exist(param_grid, best_classifiers)
+                if missing_params:
+                        print(f"{classifier_name} certain hyperparamètres sont manquants : ")
+                        best_classifiers = tune_hyperparameters(c, X_train, y_train,classifier_name,param_grid)
+                        save_hyperparameters(best_classifiers, var,classifier_name)
     
             print("Loaded hyperparameters for dataset and classifier:", var,classifier_name)
 

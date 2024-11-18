@@ -26,7 +26,6 @@ Creating virtual environment at: .venv
   - invoke -l 
   - invoke run-all
 
-
  # Installation de uv:
 
 pip install uv
