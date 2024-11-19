@@ -24,7 +24,7 @@ from config import param_splitting  # Import the global variable
 
 
 
-def save_hyperparameters(best_classifiers, dataset, classifier_name):
+def save_hyperparameters(best_classifiers, dataset, classifier_name,param_grid):
     """Save the best hyperparameters for a specific classifier in a dataset to a JSON file."""
 
     # Load existing data or start with an empty dictionary
@@ -50,7 +50,12 @@ def save_hyperparameters(best_classifiers, dataset, classifier_name):
         if classifier_name not in existing_data[dataset]:
             existing_data[dataset][classifier_name] = {}
 
-        existing_data[dataset][classifier_name][variant_name] = {"params": cleaned_params}
+        existing_data[dataset][classifier_name][variant_name] = {
+                "params": cleaned_params,
+                "range": param_grid
+        }
+        #existing_data[dataset][classifier_name][variant_name] = {"params": cleaned_params}
+        
 
     # Save the updated data back to the file
     with open(PARAMS_FILE, 'w') as file:

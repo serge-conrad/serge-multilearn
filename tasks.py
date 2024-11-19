@@ -77,9 +77,33 @@ def create_classifier(classifier_name,method, params):
 
 
 
+def check_all_params_changes(param_grids, existing_hyperparameters):
+    recalculate = False
+    for hyperparameter, grid in param_grids.items():
+        #print("A",hyperparameter)
+        #A max_depth
+        #print("B",grid)
+        #B [1, 2, 3, 4]
+        for var_name, var_data in existing_hyperparameters.items():
+            #print("C",var_name)
+            #C BinaryRelevance_iterativestratification
+            #BinaryRelevance_standard
+            #print("D",var_data['range'][hyperparameter])
+            if var_data['range'][hyperparameter] != grid:
+                print("NOT EQUAL")
+                recalculate = True
+                break
+
+            #D {'max_depth': [1, 2, 3]}
+
+            #D {'params': {'max_depth': 1}, 'range': {'max_depth': [1, 2, 3]}}
+    return recalculate 
+
+
+
 
 def check_all_params_exist(param_grids, existing_hyperparameters):
-    missing_params = []
+    #missing_params = []
 
 
     #print(param_grids)
@@ -134,7 +158,7 @@ def run_all(c):
                     # Tune hyperparameters if they do not exist
                     best_classifiers = tune_hyperparameters(c, X_train, y_train,classifier_name,param_grid)
                     # Save the best hyperparameters to file
-                    save_hyperparameters(best_classifiers, var,classifier_name)
+                    save_hyperparameters(best_classifiers, var,classifier_name,param_grid)
                     # ON recharge pour éliminer estimator__svc__C
                     best_classifiers = load_hyperparameters(var,classifier_name)
             else:
@@ -144,7 +168,13 @@ def run_all(c):
                 if missing_params:
                         print(f"{classifier_name} certain hyperparamètres sont manquants : ")
                         best_classifiers = tune_hyperparameters(c, X_train, y_train,classifier_name,param_grid)
-                        save_hyperparameters(best_classifiers, var,classifier_name)
+                        save_hyperparameters(best_classifiers, var,classifier_name,param_grid)
+                else:
+                    changing_params = check_all_params_changes(param_grid, best_classifiers)
+                    if changing_params:
+                        print(f"{classifier_name}  hyperparamètres have changed : ")
+                        best_classifiers = tune_hyperparameters(c, X_train, y_train,classifier_name,param_grid)
+                        save_hyperparameters(best_classifiers, var,classifier_name,param_grid)
     
             print("Loaded hyperparameters for dataset and classifier:", var,classifier_name)
 

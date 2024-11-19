@@ -4,43 +4,179 @@
             "BinaryRelevance_iterativestratification": {
                 "params": {
                     "max_depth": 1
+                },
+                "range": {
+                    "max_depth": [
+                        1,
+                        2,
+                        3
+                    ]
                 }
             },
             "BinaryRelevance_standard": {
                 "params": {
                     "max_depth": 1
+                },
+                "range": {
+                    "max_depth": [
+                        1,
+                        2,
+                        3
+                    ]
                 }
             },
             "OneVsRestClassifier_iterativestratification": {
                 "params": {
                     "max_depth": 1
+                },
+                "range": {
+                    "max_depth": [
+                        1,
+                        2,
+                        3
+                    ]
                 }
             },
             "OneVsRestClassifier_standard": {
                 "params": {
                     "max_depth": 1
+                },
+                "range": {
+                    "max_depth": [
+                        1,
+                        2,
+                        3
+                    ]
                 }
             }
         },
         "RandomForestClassifier": {
             "BinaryRelevance_iterativestratification": {
                 "params": {
-                    "max_depth": 3
+                    "max_depth": 3,
+                    "n_estimators": 500
+                },
+                "range": {
+                    "max_depth": [
+                        1,
+                        2,
+                        3
+                    ],
+                    "n_estimators": [
+                        100,
+                        200,
+                        500
+                    ]
                 }
             },
             "BinaryRelevance_standard": {
                 "params": {
-                    "max_depth": 3
+                    "max_depth": 3,
+                    "n_estimators": 100
+                },
+                "range": {
+                    "max_depth": [
+                        1,
+                        2,
+                        3
+                    ],
+                    "n_estimators": [
+                        100,
+                        200,
+                        500
+                    ]
                 }
             },
             "OneVsRestClassifier_iterativestratification": {
                 "params": {
+                    "max_depth": 3,
+                    "n_estimators": 500
+                },
+                "range": {
+                    "max_depth": [
+                        1,
+                        2,
+                        3
+                    ],
+                    "n_estimators": [
+                        100,
+                        200,
+                        500
+                    ]
+                }
+            },
+            "OneVsRestClassifier_standard": {
+                "params": {
+                    "max_depth": 3,
+                    "n_estimators": 100
+                },
+                "range": {
+                    "max_depth": [
+                        1,
+                        2,
+                        3
+                    ],
+                    "n_estimators": [
+                        100,
+                        200,
+                        500
+                    ]
+                }
+            }
+        }
+    },
+    "yeast": {
+        "DecisionTreeClassifier": {
+            "OneVsRestClassifier_iterativestratification": {
+                "params": {
                     "max_depth": 3
+                },
+                "range": {
+                    "max_depth": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ]
                 }
             },
             "OneVsRestClassifier_standard": {
                 "params": {
                     "max_depth": 3
+                },
+                "range": {
+                    "max_depth": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ]
+                }
+            },
+            "BinaryRelevance_iterativestratification": {
+                "params": {
+                    "max_depth": 3
+                },
+                "range": {
+                    "max_depth": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ]
+                }
+            },
+            "BinaryRelevance_standard": {
+                "params": {
+                    "max_depth": 3
+                },
+                "range": {
+                    "max_depth": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ]
                 }
             }
         }

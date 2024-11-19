@@ -3,7 +3,7 @@ PARAMS_FILE = 'best_hyperparameters.json'
 RESULT_FILE = 'results.txt'
 
 # List of datasets to evaluate
-datasets = ["emotions", "yeast"]
+datasets = ["emotions", "yeast","delicious"]
 #datasets = ["emotions"]
 #datasets = ["mediamill"]
 #datasets = ["delicious","emotions"]
@@ -29,6 +29,7 @@ param_grids = {
     },
     'RandomForestClassifier': {
         'max_depth': [1,2,3],
+        'n_estimators': [100, 200, 500],  # Number of trees in the forest.
     },
 }
 #'n_estimators': [100, 200, 500],  # Number of trees in the forest.
