@@ -1,0 +1,16 @@
+# Image Docker de base
+image: python:3.10
+
+# Stages
+stages:
+  - setup
+
+# Étape : Installation des dépendances avec UV
+setup:
+  stage: setup
+  script:
+    - python -m venv venv
+    - source venv/bin/activate
+    - pip install --upgrade pip
+    - pip install uv
+    - uv install
