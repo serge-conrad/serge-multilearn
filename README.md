@@ -51,3 +51,5 @@ config.py
 # les résultats
 best_hyperparameters.json
 resultats.txt
+uv add pre-commit
+.pre-commit-config.yaml

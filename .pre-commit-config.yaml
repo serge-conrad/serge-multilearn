@@ -1,0 +1,42 @@
+default_stages: [commit]
+
+repos:
+
+# To activate only when ready
+#  - repo: https://github.com/PyCQA/prospector
+#    rev: '1.10.0'
+#    hooks:
+#      - id: prospector
+#        args: [
+#          '--strictness high',
+#          '--full-pep8',
+#          '--max-line-length 120',
+#          '--with-tool pyroma',
+#          '--with-tool vulture',
+#          '--with-tool mypy',
+#          '--with-tool bandit',
+#          '--with-tool pyright',
+#        ]
+#        additional_dependencies:
+#          - ".[with-everything]"
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 'v4.6.0'
+    hooks:
+      - id: check-toml
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: 'v0.10.0.1'
+    hooks:
+      - id: shellcheck
+        args: ['-x']
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: 'v1.35.1'
+    hooks:
+      - id: yamllint
+        exclude: ^(deployment)
+
+

@@ -3,3 +3,7 @@ emotions;DecisionTreeClassifier;BinaryRelevance_iterativestratification;{'max_de
 emotions;DecisionTreeClassifier;BinaryRelevance_standard;{'max_depth': 1};0.5934343434343434;0.6896805582098712;0.48469626177284114
 emotions;DecisionTreeClassifier;OneVsRestClassifier_iterativestratification;{'max_depth': 1};0.5934343434343434;0.6896805582098712;0.48469626177284114
 emotions;DecisionTreeClassifier;OneVsRestClassifier_standard;{'max_depth': 1};0.5934343434343434;0.6896805582098712;0.48469626177284114
+emotions;RandomForestClassifier;BinaryRelevance_iterativestratification;{'max_depth': 3, 'n_estimators': 500};0.5987841945288754;0.8311407146736154;0.7189018528807091
+emotions;RandomForestClassifier;BinaryRelevance_standard;{'max_depth': 3, 'n_estimators': 100};0.5997001499250375;0.8273872680378993;0.7127945895385218
+emotions;RandomForestClassifier;OneVsRestClassifier_iterativestratification;{'max_depth': 3, 'n_estimators': 500};0.6097560975609756;0.8324711587953826;0.723073728886369
+emotions;RandomForestClassifier;OneVsRestClassifier_standard;{'max_depth': 3, 'n_estimators': 100};0.588597842835131;0.8326272308386503;0.7193456857747158
