@@ -23,7 +23,7 @@ Creating virtual environment at: .venv
 
   - oarsub -I
   - source .venv/bin/activate
-  - invoke -l 
+  - invoke -l
   - invoke run-all
 
  # Installation de uv:
@@ -51,5 +51,10 @@ config.py
 # les résultats
 best_hyperparameters.json
 resultats.txt
+
+# pre-commit
 uv add pre-commit
 .pre-commit-config.yaml
+
+ pre-commit install
+pre-commit installed at .git/hooks/pre-commit
